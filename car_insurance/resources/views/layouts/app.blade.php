@@ -12,7 +12,17 @@
     <div class="container">
         <a class="navbar-brand" href="{{ route('owners.index') }}">InsuranceApp</a>
     </div>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('owners.index') }}">Owners</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('cars.index') }}">Cars</a>
+        </li>
+    </ul>
 </nav>
+
+
 
 @yield('content')
 

@@ -2,22 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Car;
+use App\Models\Owner;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run()
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // create 10 owners...
+        Owner::factory(10)
+            ->create()
+            // ...and for each owner create 1–3 cars
+            ->each(function (Owner $owner) {
+                Car::factory(rand(1, 3))
+                    ->create(['owner_id' => $owner->id]);
+            });
     }
 }
