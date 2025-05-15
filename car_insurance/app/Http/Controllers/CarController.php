@@ -62,4 +62,13 @@ class CarController extends Controller
         return redirect()->route('cars.index')
             ->with('success', 'Car deleted successfully.');
     }
+    public function __construct()
+    {
+        $this->middleware('auth');
+        // only editors can create/update/delete:
+        $this->middleware('editor')
+            ->only(['create','store','edit','update','destroy']);
+    }
+
+
 }

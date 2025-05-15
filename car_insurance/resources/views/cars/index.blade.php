@@ -4,7 +4,9 @@
     <div class="container">
         <div class="d-flex justify-content-between mb-3">
             <h1>Cars</h1>
+            @if(auth()->user()->isEditor())
             <a href="{{ route('cars.create') }}" class="btn btn-primary">Add Car</a>
+            @endif
         </div>
 
         @if(session('success'))
@@ -29,12 +31,14 @@
                     <td>{{ $car->model }}</td>
                     <td>{{ $car->owner->name }} {{ $car->owner->surname }}</td>
                     <td>
+                        @if(auth()->user()->isEditor())
                         <a href="{{ route('cars.edit', $car) }}" class="btn btn-sm btn-warning">Edit</a>
                         <form action="{{ route('cars.destroy', $car) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-sm btn-danger">Delete</button>
                         </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

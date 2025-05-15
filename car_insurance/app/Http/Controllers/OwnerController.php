@@ -59,4 +59,12 @@ class OwnerController extends Controller{
         return redirect()->route('owners.index')
             ->with('success', 'Owner deleted successfully.');
     }
+    public function __construct()
+    {
+        $this->middleware('auth');
+        // only editors can create/update/delete:
+        $this->middleware('editor')
+            ->only(['create','store','edit','update','destroy']);
+    }
+
 }
