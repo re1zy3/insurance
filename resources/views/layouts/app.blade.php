@@ -31,10 +31,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link"  href="{{ route('owners.index') }}">Owners</a>
+                            <a class="nav-link"  href="{{ route('owners.index') }}">{{__('nav.Owners')}}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cars.index') }}">Cars</a>
+                            <a class="nav-link" href="{{ route('cars.index') }}">{{__('nav.Cars')}}</a>
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
@@ -79,6 +79,12 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <div class="language-switcher">
+            <a href="{{ route('setLanguage', 'en') }}">English</a>
+            <a href="{{ route('setLanguage', 'lt') }}">Lietuvių</a>
+        </div>
+        {{-- debugging --}}
+        <p>Current localization: {{ app()->getLocale() }}</p>
     </div>
 </body>
 </html>

@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Owner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class OwnerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $owners = Owner::all();
         return view('owners.index', compact('owners'));  // Pass $owners to the view

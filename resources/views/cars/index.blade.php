@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h1>Cars</h1>
-    <a href="{{ route('cars.create') }}" class="btn btn-primary mb-3">Add Car</a>
+    <h1>{{__('Cars')}}</h1>
+    <a href="{{ route('cars.create') }}" class="btn btn-primary mb-3">{{__('Add Car')}}</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -12,11 +12,11 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Registration Number</th>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Owner</th>
-                <th>Actions</th>
+                <th>{{__('Registration Number')}}</th>
+                <th>{{__('Brand')}}</th>
+                <th>{{__('Model')}}</th>
+                <th>{{__('Owner')}}</th>
+                <th>{{__('Update')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -27,11 +27,11 @@
                     <td>{{ $car->model }}</td>
                     <td>{{ $car->owner->name }} {{ $car->owner->surname }}</td>
                     <td>
-                        <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-warning btn-sm">{{__('Edit')}}</a>
                         <form action="{{ route('cars.destroy', $car->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('{{__('Are you sure?')}}')">{{__('Delete')}}</button>
                         </form>
                     </td>
                 </tr>

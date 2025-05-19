@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\LangController;
 use App\Http\Middleware\jager;
 use App\Http\Middleware\lsAdmin;
 
@@ -14,6 +15,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Language switch route
+Route::get('setLanguage/{lang}', [LangController::class, 'switchLang'])->name('setLanguage');
+
 // Owners resource routes
 Route::resource('owners', OwnerController::class)->except(['edit', 'update', 'destroy']);
 Route::resource('owners', OwnerController::class)
@@ -21,10 +25,10 @@ Route::resource('owners', OwnerController::class)
     ->middleware('jager:admin');
 
 // Cars resource routes
-Route::resource('cars', CarController::class)->only('index');
+Route::resource('cars', CarController::class)->only(['index']);
 Route::resource('cars', CarController::class)
-    ->only(['edit', 'update', 'destroy'])
+    ->only(['create', 'store', 'edit', 'update', 'destroy'])
     ->middleware('jager:admin');
 Route::resource('cars', CarController::class)
-    ->except(['index', 'edit', 'update', 'destroy'])
+    ->except(['index', 'create', 'store', 'edit', 'update', 'destroy'])
     ->middleware('jager:viewer');
