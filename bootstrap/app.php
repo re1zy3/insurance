@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\jager;
+use App\Http\Middleware\Replace;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -11,6 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->append(Replace::class);
+        // ...
+        $middleware->alias([
+            'jager' => jager::class,
+        ]);
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {

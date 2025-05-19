@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<p id="shortcode-test">This is a test: [[TestShortCode]]</p>
+<script>
+    setTimeout(function() {
+        var el = document.getElementById('shortcode-test');
+        if (el) el.style.display = 'none';
+    }, 5000);
+</script>
 <div class="container">
     <h1>Car Owners</h1>
     <a href="{{ route('owners.create') }}" class="btn btn-primary mb-3">Add Owner</a>
