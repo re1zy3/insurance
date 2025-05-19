@@ -1,4 +1,18 @@
 {
     "car_owners": "Car Owners",
-    "add_owner": "Add Owner"
+    "add_owner": "Add Owner",
+    "The registration number is required.": "The registration number is required.",
+    "The registration number must be a string.": "The registration number must be a string.",
+    "The registration number must not be greater than 10 characters.": "The registration number must not be greater than 10 characters.",
+    "The registration number must be in the correct format (e.g. ABC123).": "The registration number must be in the correct format (e.g. ABC123).",
+    "The registration number has already been taken.": "The registration number has already been taken.",
+    "The brand is required.": "The brand is required.",
+    "The brand must be a string.": "The brand must be a string.",
+    "The brand must not be greater than 30 characters.": "The brand must not be greater than 30 characters.",
+    "The model is required.": "The model is required.",
+    "The model must be a string.": "The model must be a string.",
+    "The model must not be greater than 128 characters.": "The model must not be greater than 128 characters.",
+    "The owner is required.": "The owner is required.",
+    "The selected owner does not exist.": "The selected owner does not exist.",
+    "Car added successfully.": "Car added successfully."
 }
