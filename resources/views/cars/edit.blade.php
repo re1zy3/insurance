@@ -27,5 +27,27 @@
 
         <button type="submit" class="btn btn-success">{{ __('Update') }}</button>
     </form>
+
+    <h2>{{ __('Car Photos') }}</h2>
+    <div class="row mb-3">
+        @foreach($car->photos as $photo)
+            <div class="col-md-3">
+                <img src="{{ asset('storage/' . $photo->path) }}" class="img-thumbnail mb-2" style="max-width: 100%;">
+                <form action="{{ route('cars.photos.delete', $photo->id) }}" method="POST" onsubmit="return confirm('{{ __('Are you sure?') }}');">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger btn-sm">{{ __('Delete') }}</button>
+                </form>
+            </div>
+        @endforeach
+    </div>
+
+    <h3>{{ __('Upload New Photos') }}</h3>
+    <form action="{{ route('cars.photos.upload', $car->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <label for="photos" class="form-label">{{ __('Select photos to upload') }}</label>
+        <input type="file" name="photos[]" id="photos" multiple class="form-control mb-2" accept="image/*">
+        <button type="submit" class="btn btn-primary">{{ __('Upload') }}</button>
+    </form>
 </div>
 @endsection

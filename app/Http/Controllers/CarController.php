@@ -51,14 +51,15 @@ class CarController extends Controller
 
     public function index(Request $request)
     {
-        $cars = Car::all();
+        $cars = Car::with(['photos', 'owner'])->get();
         return view('cars.index', compact('cars'));
     }
 
     public function edit($id)
     {
-        $car = Car::findOrFail($id);
-        return view('cars.edit', compact('car'));
+        $car = Car::with('photos')->findOrFail($id);
+        $owners = Owner::all();
+        return view('cars.edit', compact('car', 'owners'));
     }
 
     public function update(Request $request, $id)
@@ -82,5 +83,32 @@ class CarController extends Controller
         $car->delete();
 
         return redirect()->route('cars.index');
+    }
+
+    public function uploadPhotos(Request $request, $carId)
+    {
+        $request->validate([
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $car = Car::findOrFail($carId);
+
+        if($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('car_photos', 'public');
+                $car->photos()->create(['path' => $path]);
+            }
+        }
+
+        return redirect()->back()->with('success', __('Photos uploaded successfully.'));
+    }
+
+    public function deletePhoto($photoId)
+    {
+        $photo = CarPhoto::findOrFail($photoId);
+        \Storage::disk('public')->delete($photo->path);
+        $photo->delete();
+
+        return redirect()->back()->with('success', __('Photo deleted.'));
     }
 }

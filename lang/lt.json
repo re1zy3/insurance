@@ -3,7 +3,7 @@
     "Add New Owner": "Pridėti naują savininką",
     "Add New ShortCode": "Pridėti naują ShortCode",
     "Address": "Adresas",
-    "Are you sure?": "Ar tikrai norite ištrinti?",
+    "Are you sure?": "Ar tikrai?",
     "Brand": "Markė",
     "Delete": "Ištrinti",
     "Edit": "Redaguoti",
@@ -33,6 +33,10 @@
     "The selected owner does not exist.": "Pasirinktas savininkas neegzistuoja.",
     "Car added successfully.": "Automobilis sėkmingai pridėtas.",
     "Update": "Atnaujinti",
+    "Car Photos": "Automobilio nuotraukos",
+    "Upload New Photos": "Įkelti naujas nuotraukas",
+    "Upload": "Įkelti",
+    "Select photos to upload": "Pasirinkite nuotraukas įkėlimui",
     "You should have admin user type to make changes.": "Norėdami atlikti pakeitimus, turite turėti administratoriaus teises.",
     "admin": "administratorius",
     "viewer": "žiūrovas",
@@ -46,5 +50,6 @@
     "Remember Me": "Prisiminti mane",
     "Login": "Prisijungti",
     "Forgot Your Password?": "Pamiršote slaptažodį?",
-    "Register": "Registruotis"
+    "Register": "Registruotis",
+    "No photo": "nėra nuotraukos"
 }

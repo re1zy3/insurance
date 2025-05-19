@@ -11,9 +11,13 @@ class Car extends Model
 
     protected $fillable = ['reg_number', 'brand', 'model', 'owner_id'];
 
-    // Define the relationship with the Owner model
     public function owner()
     {
         return $this->belongsTo(Owner::class);
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(CarPhoto::class);
     }
 }

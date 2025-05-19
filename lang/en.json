@@ -14,5 +14,11 @@
     "The model must not be greater than 128 characters.": "The model must not be greater than 128 characters.",
     "The owner is required.": "The owner is required.",
     "The selected owner does not exist.": "The selected owner does not exist.",
-    "Car added successfully.": "Car added successfully."
+    "Car added successfully.": "Car added successfully.",
+    "Update": "Update",
+    "Car Photos": "Car Photos",
+    "Upload New Photos": "Upload New Photos",
+    "Delete": "Delete",
+    "Upload": "Upload",
+    "Are you sure?": "Are you sure?"
 }

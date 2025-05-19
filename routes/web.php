@@ -32,3 +32,7 @@ Route::resource('cars', CarController::class)
 Route::resource('cars', CarController::class)
     ->except(['index', 'create', 'store', 'edit', 'update', 'destroy'])
     ->middleware('jager:viewer');
+    
+// Photos 
+Route::post('cars/{car}/photos', [CarController::class, 'uploadPhotos'])->name('cars.photos.upload')->middleware('jager:admin');
+Route::delete('car-photos/{photo}', [CarController::class, 'deletePhoto'])->name('cars.photos.delete')->middleware('jager:admin');
