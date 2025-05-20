@@ -36,12 +36,16 @@
                     <td>{{ $owner->email }}</td>
                     <td>{{ $owner->address }}</td>
                     <td>
-                        <a href="{{ route('owners.edit', $owner->id) }}" class="btn btn-warning btn-sm">{{__('Edit')}}</a>
-                        <form action="{{ route('owners.destroy', $owner->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm{{__('Are you sure?')}}'">{{__('Delete')}}</button>
-                        </form>
+                        @can('update', $owner)
+                            <a href="{{ route('owners.edit', $owner->id) }}" class="btn btn-warning btn-sm">{{ __('Edit') }}</a>
+                        @endcan
+                        @can('delete', $owner)
+                            <form action="{{ route('owners.destroy', $owner->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">{{ __('Delete') }}</button>
+                            </form>
+                        @endcan
                     </td>
                 </tr>
             @endforeach

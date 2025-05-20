@@ -29,7 +29,14 @@ class OwnerController extends Controller
             'address' => 'required|string',
         ]);
 
-        Owner::create($request->all());
+        $owner = Owner::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'address' => $request->address,
+            'user_id' => auth()->id(),
+        ]);
 
         return redirect()->route('owners.index');
     }
@@ -49,6 +56,8 @@ class OwnerController extends Controller
     public function update(Request $request, $id)
     {
         $owner = Owner::findOrFail($id);
+
+        $this->authorize('update', $owner);
 
         $request->validate([
             'name' => 'required|string',

@@ -19,20 +19,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('setLanguage/{lang}', [LangController::class, 'switchLang'])->name('setLanguage');
 
 // Owners resource routes
-Route::resource('owners', OwnerController::class)->except(['edit', 'update', 'destroy']);
-Route::resource('owners', OwnerController::class)
-    ->only(['edit', 'update', 'destroy'])
-    ->middleware('jager:admin');
+Route::resource('owners', OwnerController::class);
 
 // Cars resource routes
-Route::resource('cars', CarController::class)->only(['index']);
-Route::resource('cars', CarController::class)
-    ->only(['create', 'store', 'edit', 'update', 'destroy'])
-    ->middleware('jager:admin');
-Route::resource('cars', CarController::class)
-    ->except(['index', 'create', 'store', 'edit', 'update', 'destroy'])
-    ->middleware('jager:viewer');
-    
+Route::resource('cars', CarController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+
 // Photos 
 Route::post('cars/{car}/photos', [CarController::class, 'uploadPhotos'])->name('cars.photos.upload')->middleware('jager:admin');
 Route::delete('car-photos/{photo}', [CarController::class, 'deletePhoto'])->name('cars.photos.delete')->middleware('jager:admin');

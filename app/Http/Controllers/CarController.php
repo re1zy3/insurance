@@ -44,7 +44,15 @@ class CarController extends Controller
             'owner_id.exists' => __('The selected owner does not exist.'),
         ]);
 
-        Car::create($validated);
+        $owner = Owner::findOrFail($request->owner_id);
+        $this->authorize('update', $owner); // Only allow if user can update this owner
+
+        $car = Car::create([
+            'reg_number' => $validated['reg_number'],
+            'brand' => $validated['brand'],
+            'model' => $validated['model'],
+            'owner_id' => $owner->id,
+        ]);
 
         return redirect()->route('cars.index')->with('success', __('Car added successfully.'));
     }
@@ -55,15 +63,17 @@ class CarController extends Controller
         return view('cars.index', compact('cars'));
     }
 
-    public function edit($id)
+    public function edit(Car $car)
     {
-        $car = Car::with('photos')->findOrFail($id);
+        $this->authorize('update', $car); // Only allow if user can update this car
         $owners = Owner::all();
         return view('cars.edit', compact('car', 'owners'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Car $car)
     {
+        $this->authorize('update', $car); // Only allow if user can update this car
+
         $validated = $request->validate([
             'reg_number' => 'required|string',
             'brand' => 'required|string',
@@ -71,7 +81,6 @@ class CarController extends Controller
             'owner_id' => 'required|exists:owners,id',
         ]);
 
-        $car = Car::findOrFail($id);
         $car->update($validated);
 
         return redirect()->route('cars.index');
@@ -80,6 +89,7 @@ class CarController extends Controller
     public function destroy($id)
     {
         $car = Car::findOrFail($id);
+        $this->authorize('delete', $car);
         $car->delete();
 
         return redirect()->route('cars.index');
@@ -92,6 +102,7 @@ class CarController extends Controller
         ]);
 
         $car = Car::findOrFail($carId);
+        $this->authorize('update', $car);
 
         if($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photo) {
@@ -106,6 +117,7 @@ class CarController extends Controller
     public function deletePhoto($photoId)
     {
         $photo = CarPhoto::findOrFail($photoId);
+        $this->authorize('delete', $photo);
         \Storage::disk('public')->delete($photo->path);
         $photo->delete();
 

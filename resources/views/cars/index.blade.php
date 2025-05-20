@@ -52,12 +52,16 @@
                     <td>{{ $car->model }}</td>
                     <td>{{ $car->owner->name }} {{ $car->owner->surname }}</td>
                     <td>
-                        <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-warning btn-sm">{{__('Edit')}}</a>
-                        <form action="{{ route('cars.destroy', $car->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('{{__('Are you sure?')}}')">{{__('Delete')}}</button>
-                        </form>
+                        @can('update', $car)
+                            <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-warning btn-sm">{{ __('Edit') }}</a>
+                        @endcan
+                        @can('delete', $car)
+                            <form action="{{ route('cars.destroy', $car->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">{{ __('Delete') }}</button>
+                            </form>
+                        @endcan
                     </td>
                 </tr>
             @endforeach
